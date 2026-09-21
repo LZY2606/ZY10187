@@ -1,0 +1,150 @@
+:root {
+  color-scheme: light;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+  background: #f4f1e9;
+  color: #241f18;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 28px 34px 20px;
+  background: #26392f;
+  color: #fff8e7;
+}
+
+.eyebrow { margin: 0 0 4px; color: #d9c28c; letter-spacing: .12em; font-size: 12px; }
+h1 { margin: 0; font-size: 30px; }
+h2 { margin: 0 0 14px; font-size: 18px; }
+
+.actions, .controls, .controls label, .controls fieldset {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+button, .file-button, select {
+  border: 1px solid #6d7668;
+  border-radius: 8px;
+  background: #fffaf0;
+  color: #243126;
+  padding: 8px 12px;
+  font: inherit;
+  cursor: pointer;
+}
+
+.topbar button, .topbar .file-button {
+  background: #d9c28c;
+  border-color: #d9c28c;
+}
+button.secondary { background: transparent; color: #fff8e7; border-color: #fff8e7; }
+
+main { padding: 22px 34px 42px; max-width: 1480px; margin: 0 auto; }
+.panel {
+  background: #fffdf8;
+  border: 1px solid #d8d0bd;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 8px 22px rgba(70, 56, 28, .08);
+}
+
+.controls { justify-content: space-between; flex-wrap: wrap; margin-bottom: 16px; }
+.controls fieldset { border: 1px dashed #9ba390; border-radius: 10px; padding: 8px 12px; }
+.controls legend { padding: 0 5px; font-size: 13px; color: #5c6759; }
+
+.grid { display: grid; gap: 16px; margin-bottom: 16px; }
+.charts { grid-template-columns: 1fr; }
+.two { grid-template-columns: 1fr 1.4fr; }
+svg { width: 100%; height: auto; display: block; }
+
+.notice {
+  margin-bottom: 16px;
+  border-left: 5px solid #b04a2f;
+  background: #fff1df;
+  padding: 12px 14px;
+  border-radius: 8px;
+}
+.hidden { display: none; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; margin-top: 8px; }
+.legend span::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+  background: currentColor;
+}
+
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th, td { border-bottom: 1px solid #e5ddcc; padding: 8px 7px; text-align: right; white-space: nowrap; }
+th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) { text-align: left; }
+tr.selected { background: #f2ead7; }
+tr.extrapolated td { background: #fff2dc; }
+
+.coeff {
+  min-width: 88px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.coeff.null { color: #8b8172; }
+.badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  font-size: 11px;
+  background: #f0dfb8;
+}
+.badge.bad { background: #f1b9aa; }
+
+.hint { color: #70685a; font-size: 13px; }
+.explanation { border-left: 3px solid #8d9a7d; padding: 8px 10px; margin: 8px 0; background: #f7f4ea; }
+.explanation strong { display: block; margin-bottom: 3px; }
+
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.vector-box {
+  border: 1px solid #ddd3bf;
+  border-radius: 9px;
+  padding: 9px;
+  background: #fbf7ee;
+  overflow-x: auto;
+}
+.vector-box h3 { margin: 0 0 7px; font-size: 13px; }
+.numbers { display: flex; gap: 5px; flex-wrap: wrap; }
+.numbers span {
+  background: #fff;
+  border: 1px solid #e4dac7;
+  border-radius: 6px;
+  padding: 3px 5px;
+  font: 11px/1.2 ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.matrix {
+  font: 11px/1.35 ui-monospace, SFMono-Regular, Menlo, monospace;
+  overflow-x: auto;
+  white-space: pre;
+  background: #fbf7ee;
+  border: 1px solid #ddd3bf;
+  border-radius: 9px;
+  padding: 10px;
+}
+.contribution-row {
+  display: grid;
+  grid-template-columns: 150px 1fr 120px;
+  gap: 10px;
+  padding: 7px 0;
+  border-bottom: 1px solid #eee5d5;
+  font-size: 13px;
+}
+.contribution-row.total { font-weight: 700; background: #f3ead5; }
+
+@media (max-width: 900px) {
+  .topbar, .two { display: block; }
+  .actions { margin-top: 14px; flex-wrap: wrap; }
+  .detail-grid { grid-template-columns: 1fr; }
+}
