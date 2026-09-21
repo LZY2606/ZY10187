@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>风洞零线帐</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header>
+  <h1>风洞零线帐</h1>
+  <div class="sub">空载锨点 · 漂移拟合 · 天平→模型→风轴 · 系数逐项回查</div>
+</header>
+
+<section class="toolbar">
+  <label>Run
+    <select id="runSelect"></select>
+  </label>
+  <label>漂移模型
+    <select id="driftMode">
+      <option value="LINEAR">线性最小二乘</option>
+      <option value="SEGMENT">分段（锨点间插补）</option>
+    </select>
+  </label>
+  <label>旋转次序
+    <select id="rotationOrder">
+      <option value="YZ">YZ：Ry(−α)·Rz(β)（默认）</option>
+      <option value="ZY">ZY：Rz(β)·Ry(−α)（对比）</option>
+    </select>
+  </label>
+  <label>标定版本
+    <select id="calibVersion"></select>
+  </label>
+  <button id="applyBtn">保存为本 run 设置</button>
+  <span class="spacer"></span>
+  <button id="exportBtn">导出运行记录</button>
+  <label class="filebtn">导入复核<input type="file" id="importFile" accept="application/json,.json"></label>
+  <label class="filebtn"><input type="checkbox" id="importClear"> 导入前清空</label>
+  <button id="resetBtn">恢复内置 fixture</button>
+</section>
+
+<div id="banner" class="banner hidden"></div>
+
+<main>
+  <section class="card">
+    <h2>① 状态序列与空载曲线</h2>
+    <div id="tareControls" class="tare-controls"></div>
+    <svg id="seqChart" viewBox="0 0 960 240" preserveAspectRatio="none"></svg>
+    <div class="legend" id="seqLegend"></div>
+    <p class="note" id="envelopeNote"></p>
+  </section>
+
+  <section class="card">
+    <h2>② 六通道原值 → 零线修正 → 天平解耦</h2>
+    <svg id="channelChart" viewBox="0 0 960 300" preserveAspectRatio="none"></svg>
+    <div class="legend" id="channelLegend"></div>
+  </section>
+
+  <section class="card">
+    <h2>③ 角度约定与坐标变换（模型轴 / 风轴）</h2>
+    <div class="axes-wrap">
+      <svg id="axesSvg" viewBox="0 0 420 260"></svg>
+      <div class="conv" id="conventions"></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>④ 最终气动力系数（点击系数查看贡献）</h2>
+    <div class="table-wrap">
+      <table id="coefTable">
+        <thead><tr>
+          <th>t (s)</th><th>α (°)</th><th>β (°)</th><th>q (Pa)</th><th>温度 (K)</th>
+          <th>Cd</th><th>Cy</th><th>CL</th><th>Croll</th><th>Cm</th><th>Cn</th><th>标记</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<dialog id="detailDialog">
+  <article>
+    <h3 id="detailTitle"></h3>
+    <div id="detailBody"></div>
+    <menu><button id="detailClose">关闭</button></menu>
+  </article>
+</dialog>
+
+<footer>
+  <span>本地服务 · SQLite 持久化 · 数据可导出/清空/重导复核</span>
+  <a href="/api/export">快照 JSON</a>
+  <a href="/api/audit">操作记录</a>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>

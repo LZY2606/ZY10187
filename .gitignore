@@ -34,3 +34,6 @@ coverage/
 .vite/
 .turbo/
 *.tsbuildinfo
+
+# SQLite 运行数据库（可随时清空重导）
+data/
